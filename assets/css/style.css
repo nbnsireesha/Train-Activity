@@ -1,0 +1,49 @@
+.jumbotron {
+	text-align: center;
+}
+
+.panel-default >.panel-heading{
+	
+	font-weight: bold;
+	background-color: #CEF6EC;
+	color : black;
+
+}
+
+.panel-body > #traininfo {
+	font-weight: bold;
+}
+body{
+	background-image: url("https://images.pexels.com/photos/168442/pexels-photo-168442.jpeg?h=350&auto=compress&cs=tinysrgb");
+}
+#logo{
+	float: left;
+	
+}
+.jumbotron .img {
+    margin-bottom: 0px;
+    opacity: 0.2;
+    color: #FBF5EF;
+    background: #000 url("https://images.pexels.com/photos/258455/pexels-photo-258455.jpeg?h=350&auto=compress&cs=tinysrgb") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    text-align: center;
+  
+  
+  position:absolute;
+  top:0;left:0;
+  z-index:1;
+}
+.jumbotron {position:relative;padding:50px;}
+.jumbotron .container {z-index:2;
+ position:relative;
+  z-index:2;
+}
+th{
+	color: #FFBF00;
+}
+label{
+	color: #FFBF00;
+}
