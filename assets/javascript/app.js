@@ -56,52 +56,44 @@ $(document).ready(function(){
 		frequency.append(data.val().frequency);
 		r.append(frequency);
 
-//**************** get date difference ************************
+		
+		var ftt = data.val().firstTrainTime;
+		var freq = data.val().frequency;
+		console.log(data.val().firstTrainTime);
+		console.log(data.val().frequency);
 
-  //       var addDate = moment(data.val().startDate);
-		// console.log(addDate);
-		// var dateTime = new Date(moment());
-		// var interimDate = moment(dateTime).format("MM/DD/YY");
-		// var endDate = moment(endDate);
-  // 		//console.log('Difference is ', endDate.diff(addDate, 'months'), 'months');
-  // 		var diffDate = endDate.diff(addDate, 'months')
-  // 		console.log(diffDate);
+		var currentTime = moment();
+		console.log(moment(currentTime).format("hh:mm"));
 
-  			var todayDate = new Date();
-  			var frq = moment(data.val().frequency);
-  			console.log(frq._i);
-  			var firstdate = moment(data.val().firstTrainTime);
-  			console.log(todayDate);
-  			var currentTime = moment(todayDate).format("LT");
-  			console.log(currentTime);
-  			var trianstartTime = moment(firstdate);
-  			console.log(trianstartTime._i);
-  			var firstTrainTime = trianstartTime._i;
-  			console.log(firstTrainTime);
-  			var nextArrival = moment(firstTrainTime,"HH:mm").add(frq._i,'minutes').format("LT");
-  			console.log("next is"+nextArrival);
-  			var nextArrivalTrain = $("<td>");
-  			nextArrivalTrain.append(nextArrival);
-			r.append(nextArrivalTrain);
+		var firstTimeconvertion = moment(ftt,"hh:mm").subtract(1,"days");
+		console.log(firstTimeconvertion)
 
-  			// var nextArrival = moment(firstdate).add(frequency,"minutes");
-  			// console.log(nextArrival._i);
-//*****************************************************************
-		//calculate minutes away
-		var startTime = moment(nextArrival,"hh:mm");
-		var endTime = moment(currentTime,"hh:mm");
-		var duration = moment.duration(startTime.diff(endTime));
-		var minutes = parseInt(duration.asMinutes());
-		console.log(minutes);
-		var mins = moment.utc(moment(endTime, "HH:mm:ss").diff(moment(startTime, "HH:mm:ss"))).format("mm");
-		console.log(mins);
+		var timeDiff = moment().diff(moment(firstTimeconvertion),"minutes");
+		console.log("Difference in time: " + timeDiff);
 
-		var minutesAway = $("<td>");
-  		minutesAway.append(minutes);
-		r.append(minutesAway);
+		var remainder = timeDiff % freq;
+		console.log("Remainder: ", remainder);
+
+		var minsUntilTrain = freq - remainder;
+		console.log("Time Til Train: " + minsUntilTrain);
+
+		var nextTrainTime = moment().add(minsUntilTrain, "minutes");
+		console.log("Next arrival: " + moment(nextTrainTime).format("hh:mm"));
+		var gom = moment(nextTrainTime).format("hh:mm A");
+		console.log(gom);
+
+		//var nextTrainTimeFormated = moment().add(minsUntilTrain, "minutes");
+
+		var nextTrainAt = $("<td>");
+		nextTrainAt.append(gom);
+		r.append(nextTrainAt);
+
+		var minRemain = $("<td>");
+		minRemain.append(minsUntilTrain);
+		r.append(minRemain);
 
 
-		$("tbody").append(r);
+		 $("tbody").append(r);
 	})
 })
 
