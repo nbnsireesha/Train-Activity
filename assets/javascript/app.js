@@ -13,7 +13,6 @@
 // Create a variable to reference the database.
 var database = firebase.database();
 
-//put all code inside document.ready function
 $(document).ready(function(){
 	$("#submit-employee").on("click", function(event){
 		//prevent default form submission
@@ -56,13 +55,14 @@ $(document).ready(function(){
 		frequency.append(data.val().frequency);
 		r.append(frequency);
 
-		
+		//getting information from the data base
 		var ftt = data.val().firstTrainTime;
 		var freq = data.val().frequency;
 		console.log(data.val().firstTrainTime);
 		console.log(data.val().frequency);
 
 		var currentTime = moment();
+		$("#currentTime").html("Current Time:" +moment(currentTime).format("hh:mm A"));
 		console.log(moment(currentTime).format("hh:mm"));
 
 		var firstTimeconvertion = moment(ftt,"hh:mm").subtract(1,"days");
@@ -82,8 +82,6 @@ $(document).ready(function(){
 		var gom = moment(nextTrainTime).format("hh:mm A");
 		console.log(gom);
 
-		//var nextTrainTimeFormated = moment().add(minsUntilTrain, "minutes");
-
 		var nextTrainAt = $("<td>");
 		nextTrainAt.append(gom);
 		r.append(nextTrainAt);
@@ -96,10 +94,3 @@ $(document).ready(function(){
 		 $("tbody").append(r);
 	})
 })
-
-// 		var startTime=moment("12:16:59 am", "HH:mm:ss a");
-// var endTime=moment("06:12:07 pm", "HH:mm:ss a");
-// var duration = moment.duration(endTime.diff(startTime));
-// var hours = parseInt(duration.asHours());
-// var minutes = parseInt(duration.asMinutes())-hours*60;
-// alert (hours + ' hour and '+ minutes+' minutes.');
